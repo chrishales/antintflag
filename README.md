@@ -49,7 +49,7 @@ antintflag will now be available when you open a fresh terminal and start CASA w
 Acknowledging use of antintflag
 ======
 
-antintflag is provided in the hope that it (or elements of its code) will be useful for your work. If you find that it is, I would appreciate your acknowledgement by citing [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.163002.svg)](https://doi.org/10.5281/zenodo.163002) as follows (note the [AAS guidelines for citing software](http://journals.aas.org/policy/software.html)):
+antintflag is provided in the hope that it (or elements of its code) will be useful for your work. If you find that it is, I would appreciate your acknowledgement by citing [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.163546.svg)](https://doi.org/10.5281/zenodo.163546) as follows (note the [AAS guidelines for citing software](http://journals.aas.org/policy/software.html)):
 ```
-Hales, C. A. 2016, antintflag, v1.0, doi:10.5281/zenodo.163002, as developed on GitHub
+Hales, C. A. 2016, antintflag, v1.0, doi:10.5281/zenodo.163546, as developed on GitHub
 ```
