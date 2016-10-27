@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" ?>
+<casaxml xmlns="http://casa.nrao.edu/schema/psetTypes.html"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://casa.nrao.edu/schema/casa.xsd
+    file:///opt/casa/code/xmlcasa/xml/casa.xsd">
+
+    <task type="function" name="antintflag" category="editing">
+        <shortdescription>Flags integrations if a specified antenna is flagged.</shortdescription>
+        <description>
+                
+		This task will flag any integration in which all
+		baselines to a specified antenna are flagged, but
+		only if this condition is satisfied in greater than
+		a nominated fraction of channels within the spectral
+		window of interest.  All polarization products must be
+		unflagged for antintflag to deem a baseline unflagged.
+		
+		This task also supports a channel mode where it will
+		operate on a single channel in a nominated spectral
+		window.  It will pass on any flagging to the entire
+		spectral window.
+		
+		antintflag is only suitable for data in which the
+		nominated antenna drops out occasionally (e.g. first
+		few integrations of a scan due to slewing).
+		
+		An application in mind is removal of data that will
+		otherwise lead to changes in reference antenna during
+		gain calibration, which could in turn lead to corrupted
+		polarization calibration.
+		
+		antintflag will report how much flagging was performed.
+		However, this task will not back up existing flags;
+		please do this manually using flagmanager (mode=save).
+		
+                Christopher A. Hales
+                Version 1.0 (tested with CASA Version 4.7.0)
+                27 October 2016
+                
+                Code available at: http://github.com/chrishales/antintflag
+                antintflag is released under a BSD 3-Clause License;
+                see LICENSE for details.
+                
+                
+                
+        </description>
+
+        <input>
+            <param type="string" name="vis" mustexist="true">
+                <description>input MS or MMS</description>
+                <value />
+            </param>
+            <param type="int" name="field">
+                <description>field index number (not name)</description>
+                <value>0</value>
+            </param>
+            <param type="string" name="spw">
+                <description>spectral window with optional channel (e.g. \'0:7\')</description>
+                <value>0</value>
+            </param>
+            <param type="string" name="ant">
+                <description>antenna name (not index number)</description>
+                <value>ea01</value>
+            </param>
+            <param type="double" name="minchanfrac">
+                <description>min. fraction of channels with flagged antenna to initiate flagging</description>
+                <value>0.6</value>
+            </param>
+            <param type="bool" name="verbose">
+                <description>print timestamps of flagged integrations to the log</description>
+                <value>False</value>
+            </param>
+        </input>
+
+        <returns type="void"/>
+        <example>
+
+----- Detailed descriptions of keyword arguments -----
+
+
+   Keyword arguments:
+       
+       
+       antintflag does not support multiple index selection (e.g. field='0,2').
+       In such cases, simply rerun antintflag for each index separately.
+   
+       
+               vis -- Name of input MS or MMS.  This code will operate on the
+                      'CORRECTED_DATA' column if available, else the 'DATA' column.
+		      Circular and linear feed bases both supported, but if your
+		      dataset is not simple (e.g. you use subscans, etc), then
+		      antintflag probably won't work.
+       
+       
+             field -- Field index number (integer).
+       
+       
+               spw -- Spectral window with optional channel (string). For example,
+                      '2' or '2:12', respectively.
+       
+       
+               ant -- Antenna name (string).
+       
+       
+       minchanfrac -- Minimum fraction of spw channels that must each contain
+                      fully flagged baselines to the nominated antenna in order
+		      for the integration of interest to be flagged.  Specify
+		      between 0-1 (float).  minchanfrac will be ignored if spw
+		      specifies a channel.
+       
+       
+           verbose -- Print timestamps of flagged integrations to the log (boolean).
+		      
+       
+       
+        </example>
+    </task>
+</casaxml>
